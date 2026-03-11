@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# oc — vanilla OpenCode (no oh-my-opencode)
+#
+# Runs opencode with a separate config dir (~/.config/oc/opencode/) that has
+# your custom skills/agents but none of oh-my-opencode's plugin overrides.
+# Skills, agents, commands, and plugins are symlinked back to the main config
+# so you maintain one canonical set of artifacts.
+#
+# Usage:
+#   oc                          # TUI mode
+#   oc run "do something"       # headless
+#   oc run --agent steve-jobs   # with specific agent
+#   oc debug skill              # list skills (should show your custom ones)
+#
+# vs:
+#   opencode                    # oh-my-opencode mode (default)
+
+exec env XDG_CONFIG_HOME="$HOME/.config/oc" opencode "$@"
