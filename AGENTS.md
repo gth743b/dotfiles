@@ -34,6 +34,32 @@ This repo is a personal dotfiles setup managed with GNU Stow.
   - Put machine/user secrets in `~/.zsh_secrets` (gitignored)
   - Template: `zsh/.zsh_secrets.example`
 
+## OpenCode Agents
+
+Custom agents live under `opencode/.config/opencode/` and stow to `~/.config/opencode/`.
+
+### Extension types
+
+| Type | Location | Trigger |
+|------|----------|---------|
+| Skill | `skills/<name>/SKILL.md` | Auto-matched by skill loader |
+| Agent | `agents/<name>.md` | Tab to switch, or `@<name>` mention |
+| Command | `commands/<name>.md` | `/<name>` in-session |
+
+### Agent Forge
+
+The meta-agent for creating new agents. Use it to go from idea to working agent:
+
+```bash
+agent-forge "an agent that reviews PRs for security"   # headless creation
+agent-forge --edit steve-jobs                           # iterate on existing
+agent-forge --list                                      # see what you have
+agent-forge                                             # interactive TUI
+```
+
+The skill is at `opencode/.config/opencode/skills/agent-forge/SKILL.md` (via `skills → skill` symlink).
+The bin script is at `bin/.local/bin/agent-forge`.
+
 ## Conventions / safety
 
 - Keep changes scoped to the relevant package directory.

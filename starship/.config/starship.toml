@@ -3,8 +3,10 @@
 # Increase timeout for git operations (default 500ms is too aggressive)
 command_timeout = 2000
 
-format = """$directory $git_branch$git_state$git_status$aws$cmd_duration$custom
-$python$character"""
+add_newline = false
+
+format = """$directory $git_branch$git_state$git_status$aws$gcloud${custom.github}$cmd_duration${custom.spectre}$direnv$nix_shell$rust$golang$python$nodejs$bun$terraform$docker_context$package
+$character"""
 
 [directory]
 style = "#d4b88c"
@@ -17,6 +19,7 @@ success_symbol = "[❯](#d4b88c)"
 error_symbol = "[❯](#e08a9e)"
 vimcmd_symbol = "[❮](#b89aad)"
 
+# ── Git ──────────────────────────────────────────────────────────────────────
 [git_branch]
 format = "[$branch]($style)"
 style = "#86cfc3"
@@ -46,10 +49,7 @@ format = "[$duration]($style)"
 style = "#7a7a8a"
 min_time = 2000
 
-[python]
-format = "[py:$virtualenv]($style) "
-style = "#95d194"
-
+# ── Cloud / infra ────────────────────────────────────────────────────────────
 [aws]
 format = '[$profile]($style) '
 style = '#7da4e4'
@@ -58,6 +58,100 @@ symbol = ''
 us-east-1 = 'va'
 [aws.profile_aliases]
 CompanyGroupFrobozzOnCallAccess = 'Frobozz'
+
+[gcloud]
+format = '[$active]($style) '
+style = '#7da4e4'
+symbol = ''
+
+[docker_context]
+format = '[docker:$context]($style) '
+style = '#68687a'
+symbol = ''
+only_with_files = true
+
+[terraform]
+format = '[tf:$version $workspace]($style) '
+style = '#b89aad'
+symbol = ''
+
+# ── Language / runtime contexts ──────────────────────────────────────────────
+# These only render when you're inside a project with the relevant files.
+
+[direnv]
+format = '[$allowed]($style) '
+style = '#68687a'
+symbol = ''
+allowed_msg = '✓'
+denied_msg = '✗'
+loaded_msg = '✓'
+unloaded_msg = ''
+disabled = false
+
+[nix_shell]
+format = '[nix:$state$name]($style) '
+style = '#7da4e4'
+symbol = ''
+impure_msg = ''
+pure_msg = 'pure'
+
+[rust]
+format = '[rs:$version]($style) '
+style = '#e08a9e'
+symbol = ''
+
+[golang]
+format = '[go:$version]($style) '
+style = '#86cfc3'
+symbol = ''
+
+[python]
+format = "[py:$virtualenv]($style) "
+style = "#95d194"
+
+[nodejs]
+format = '[node:$version]($style) '
+style = '#95d194'
+symbol = ''
+detect_extensions = []
+detect_files = ['.node-version', '.nvmrc']
+detect_folders = []
+
+[bun]
+format = '[bun:$version]($style) '
+style = '#e4cfa0'
+symbol = ''
+
+[package]
+format = '[$version]($style) '
+style = '#68687a'
+symbol = ''
+display_private = true
+
+# ── GitHub account ───────────────────────────────────────────────────────────
+# Shows the active gh CLI account in the prompt.
+# Reads directly from gh's config file — no subprocess/network overhead.
+# Per-repo override: GH_USER env var or .github-account file at repo root.
+[custom.github]
+command = '''
+  # 1. per-repo file override
+  root=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [ -n "$root" ] && [ -f "$root/.github-account" ]; then
+    head -1 "$root/.github-account" | tr -d '[:space:]'
+    exit 0
+  fi
+  # 2. env-var override (works great with direnv)
+  if [ -n "$GH_USER" ]; then
+    echo "$GH_USER"
+    exit 0
+  fi
+  # 3. default: parse active user straight from gh config yaml
+  cfg="${GH_CONFIG_DIR:-$HOME/.config/gh}/hosts.yml"
+  [ -f "$cfg" ] || exit 0
+  awk '/^[^ ]/{host=$0} host && /^    user:/{gsub(/^    user: */,""); print; exit}' "$cfg"
+'''
+when = 'test -f "${GH_CONFIG_DIR:-$HOME/.config/gh}/hosts.yml"'
+format = ' [$output](#b89aad)'
 
 # ── Firecrew / Spectre ──────────────────────────────────────────────────────
 # Shows spectre daemon state + session count when active.
@@ -75,4 +169,3 @@ command = '''
 '''
 when = 'test -S "${SPECTRE_SOCKET:-/tmp/spectre.sock}"'
 format = ' [$output](#7a7a8e)'
-shell = ['bash', '--noglob', '--norc', '--noprofile', '-c']

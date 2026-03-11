@@ -12,13 +12,13 @@ export DOTFILES_OS="${DOTFILES_OS:-$(uname -s | tr '[:upper:]' '[:lower:]')}"
 # Nix - only if available
 # ============================================================================
 
-if [[ -f /etc/profile.d/nix.sh ]]; then
-  source /etc/profile.d/nix.sh
-elif [[ -f ~/.nix-profile/etc/profile.d/nix.sh ]]; then
-  source ~/.nix-profile/etc/profile.d/nix.sh
-elif [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
-  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-fi
+# if [[ -f /etc/profile.d/nix.sh ]]; then
+#   source /etc/profile.d/nix.sh
+# elif [[ -f ~/.nix-profile/etc/profile.d/nix.sh ]]; then
+#   source ~/.nix-profile/etc/profile.d/nix.sh
+# elif [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
+#   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+# fi
 
 # ============================================================================
 # PATH - composable additions
@@ -124,11 +124,15 @@ export VISUAL="${VISUAL:-nvim}"
 
 
 
-# opencode
-export PATH=/Users/Patrick.Hall/.opencode/bin:$PATH
-
 # bun completions
-[ -s "/Users/Patrick.Hall/.bun/_bun" ] && source "/Users/Patrick.Hall/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
+# Warp terminal
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
-export PATH=$PATH:/Users/Patrick.Hall/go/bin
+
+# OpenFang
+[[ -d "$HOME/.openfang/bin" ]] && export PATH="$HOME/.openfang/bin:$PATH"
+
+# Google Cloud SDK
+[ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ] && source "$HOME/Downloads/google-cloud-sdk/path.zsh.inc"
+[ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ] && source "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"

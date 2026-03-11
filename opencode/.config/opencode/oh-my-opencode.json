@@ -1,20 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
 
-  "_original_gpt_models": {
-    "oracle": "openai/gpt-5.3",
-    "explore": "opencode/gpt-5-nano",
-    "document-writer": "openai/gpt-5.3",
-    "quick": "opencode/gpt-5-nano"
-  },
-
   "agents": {
-    "build": {
-      "model": "anthropic/claude-sonnet-4-6"
-    },
-    "plan": {
-      "model": "anthropic/claude-sonnet-4-6"
-    },
     "sisyphus": {
       "model": "anthropic/claude-opus-4-6"
     },
@@ -22,7 +9,7 @@
       "model": "anthropic/claude-sonnet-4-6"
     },
     "oracle": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "openai/gpt-5.3-codex"
     },
     "prometheus": {
       "model": "anthropic/claude-sonnet-4-6"
@@ -34,25 +21,25 @@
       "model": "anthropic/claude-sonnet-4-6"
     },
     "librarian": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "openai/gpt-5-nano"
     },
     "explore": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "openai/gpt-5-nano"
     },
     "frontend-ui-ux-engineer": {
       "model": "anthropic/claude-sonnet-4-6"
     },
     "document-writer": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "openai/gpt-5.3"
     },
     "multimodal-looker": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "openai/gpt-5.3"
     }
   },
 
   "categories": {
     "quick": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "openai/gpt-5-nano"
     },
     "visual-engineering": {
       "model": "anthropic/claude-sonnet-4-6"
@@ -61,16 +48,16 @@
       "model": "anthropic/claude-opus-4-6"
     },
     "deep": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "openai/gpt-5.3-codex"
     },
     "artistry": {
       "model": "anthropic/claude-sonnet-4-6"
     },
     "writing": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "openai/gpt-5.3"
     },
     "unspecified-low": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "openai/gpt-5-nano"
     },
     "unspecified-high": {
       "model": "anthropic/claude-sonnet-4-6"

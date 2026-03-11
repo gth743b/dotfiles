@@ -83,6 +83,11 @@ alias gd='git diff'
 alias gl='git log --oneline --graph'
 alias glog='git log --oneline --graph --all --decorate'
 
+# gh cli shortcuts
+alias gw='gh run watch'
+alias grl='gh run list -L 10'
+
+
 # Tmux shortcuts
 alias tm='tmux'
 alias tma='tmux attach'

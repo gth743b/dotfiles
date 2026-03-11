@@ -19,6 +19,8 @@
 
 # Local machine-specific configs
 *.local
+!.local/
+.github-account
 .opencode/.config/opencode/package.json
 
 bun.lock
