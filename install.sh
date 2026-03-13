@@ -47,6 +47,10 @@ elif [ "$OS" == "linux" ]; then
 fi
 
 echo ""
+echo "📥 Initializing git submodules..."
+git submodule update --init --recursive
+
+echo ""
 echo "🔗 Linking dotfiles with stow..."
 
 # On Linux, skip ghostty (macOS only terminal)

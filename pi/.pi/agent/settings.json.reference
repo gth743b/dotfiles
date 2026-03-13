@@ -1,0 +1,89 @@
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║  Pi Settings Reference                                         ║
+// ║  Copy values you want into settings.json (remove comments!)    ║
+// ║  Docs: pi /settings or docs/settings.md                        ║
+// ╚══════════════════════════════════════════════════════════════════╝
+{
+  // ── Model & Thinking ──────────────────────────────────────────────
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-sonnet-4-20250514",
+  "defaultThinkingLevel": "medium",          // off|minimal|low|medium|high|xhigh
+  "hideThinkingBlock": false,
+  "thinkingBudgets": {
+    "minimal": 1024,
+    "low": 4096,
+    "medium": 10240,
+    "high": 32768
+  },
+
+  // ── Model Cycling (Ctrl+P) ────────────────────────────────────────
+  "enabledModels": ["claude-*", "gpt-4o", "gemini-2*"],
+
+  // ── UI & Display ──────────────────────────────────────────────────
+  "theme": "dark",                           // dark|light|<custom name>
+  "quietStartup": false,
+  "collapseChangelog": false,
+  "doubleEscapeAction": "tree",              // tree|fork|none
+  "treeFilterMode": "default",              // default|no-tools|user-only|labeled-only|all
+  "editorPaddingX": 0,                      // 0-3
+  "autocompleteMaxVisible": 5,              // 3-20
+  "showHardwareCursor": false,
+
+  // ── Compaction ────────────────────────────────────────────────────
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 16384,
+    "keepRecentTokens": 20000
+  },
+
+  // ── Branch Summary ────────────────────────────────────────────────
+  "branchSummary": {
+    "reserveTokens": 16384,
+    "skipPrompt": false
+  },
+
+  // ── Retry ─────────────────────────────────────────────────────────
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3,
+    "baseDelayMs": 2000,
+    "maxDelayMs": 60000
+  },
+
+  // ── Message Delivery ──────────────────────────────────────────────
+  "steeringMode": "one-at-a-time",          // one-at-a-time|all
+  "followUpMode": "one-at-a-time",          // one-at-a-time|all
+  "transport": "sse",                        // sse|websocket|auto
+
+  // ── Terminal & Images ─────────────────────────────────────────────
+  "terminal": {
+    "showImages": true,
+    "clearOnShrink": false
+  },
+  "images": {
+    "autoResize": true,
+    "blockImages": false
+  },
+
+  // ── Shell ─────────────────────────────────────────────────────────
+  "shellPath": "/bin/zsh",
+  "shellCommandPrefix": "",
+
+  // ── Markdown ──────────────────────────────────────────────────────
+  "markdown": {
+    "codeBlockIndent": "  "
+  },
+
+  // ── Skills ────────────────────────────────────────────────────────
+  "enableSkillCommands": true,
+
+  // ── Resource Paths ────────────────────────────────────────────────
+  // Relative to ~/.pi/agent/ (global) or .pi/ (project)
+  "extensions": [],
+  "skills": [],
+  "prompts": [],
+  "themes": [],
+
+  // ── Packages (npm/git) ────────────────────────────────────────────
+  "packages": []
+}
